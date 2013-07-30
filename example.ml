@@ -26,13 +26,15 @@ let _ =
 
       List.iter print_repo repos.Github.repos;
 
-      match repos.Github.repos with
+      (match repos.Github.repos with
 	| [] -> ()
 	| first_repo::rest ->
 
-	  match Github.get_readme_from_repository first_repo with
+	  (match Github.get_readme_from_repository first_repo with
 	    | Github.Error error    -> prerr_endline ("[Error] " ^ error)
 	    | Github.Success readme ->
 
 	      print_endline "README of the 1st repo:";
-	      print_endline readme
+	      print_endline readme));
+
+      Github.disconnect ()
